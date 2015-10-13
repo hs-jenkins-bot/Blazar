@@ -8,8 +8,16 @@ jest.dontMock('underscore');
 jest.dontMock('../../test-utils/helpers');
 
 import React from 'react/addons';
+const TestUtils = React.addons.TestUtils;
 import Breadcrumbs from '../../components/header/Breadcrumbs.jsx';
-import {renderedOutput} from '../../test-utils/helpers';
+
+// To do: pull this in from test-utilds
+// import {renderedOutput} from '../../test-utils/helpers';
+function renderedOutput(elt) {
+  const shallowRenderer = TestUtils.createRenderer();
+  shallowRenderer.render(elt);
+  return shallowRenderer.getRenderOutput();
+}
 
 
 describe('<Breadcrumbs />', () => {
