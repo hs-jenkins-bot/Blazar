@@ -231,7 +231,7 @@
                   <name>hubspot/blazarservice:${project.version}</name>
                   <build>
                     <from>java:8u65-jre</from>
-                    <maintainer>platform-infrastructure-groups@hubspot.com</maintainer>
+                    <maintainer>paas@hubspot.com</maintainer>
                     <ports>
                       <port>8099</port>
                     </ports>
