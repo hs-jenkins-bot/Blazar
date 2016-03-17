@@ -1,0 +1,5 @@
+stepActivation:
+  upload:
+    branches: [intraRepo]
+  notify:
+    branches: [intraRepo]

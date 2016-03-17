@@ -3,6 +3,7 @@ package com.hubspot.blazar.listener;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.multibindings.Multibinder;
+import com.hubspot.blazar.base.visitor.InterProjectBuildVisitor;
 import com.hubspot.blazar.base.visitor.ModuleBuildVisitor;
 import com.hubspot.blazar.base.visitor.RepositoryBuildVisitor;
 
@@ -28,6 +29,8 @@ public class BuildVisitorModule implements Module {
     repositoryBuildVisitors.addBinding().to(SlackNotificationVisitor.class);
     // monitor repo build state changes
     repositoryBuildVisitors.addBinding().to(MetricBuildVisitor.class);
+    // Make note of launched module Builds for IPR builds
+    repositoryBuildVisitors.addBinding().to(InterProjectRepositoryBuildVisitor.class);
 
     Multibinder<ModuleBuildVisitor> moduleBuildVisitors = Multibinder.newSetBinder(binder, ModuleBuildVisitor.class);
 
@@ -47,5 +50,11 @@ public class BuildVisitorModule implements Module {
     moduleBuildVisitors.addBinding().to(SlackNotificationVisitor.class);
     // monitor module build state changes
     moduleBuildVisitors.addBinding().to(MetricBuildVisitor.class);
+    // launch interProjectChildren for completed Modules
+    moduleBuildVisitors.addBinding().to(InterProjectModuleBuildVisitor.class);
+
+    Multibinder<InterProjectBuildVisitor> interProjectBuildVisitors = Multibinder.newSetBinder(binder, InterProjectBuildVisitor.class);
+
+    interProjectBuildVisitors.addBinding().to(InterProjectBuildLauncher.class);
   }
 }
