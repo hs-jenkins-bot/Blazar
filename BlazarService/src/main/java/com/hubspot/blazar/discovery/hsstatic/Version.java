@@ -2,11 +2,11 @@ package com.hubspot.blazar.discovery.hsstatic;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public class MajorVersion {
+public class Version {
   private final int version;
 
   @JsonCreator
-  public MajorVersion (int version) {
+  public Version(int version) {
     this.version = version;
   }
 
@@ -15,7 +15,7 @@ public class MajorVersion {
   }
 
   @JsonCreator
-  public static MajorVersion fromString(String string) {
+  public static Version fromString(String string) {
     String[] split = string.split(" ?\\|\\| ?");
     Integer max = 0;
     for (String s: split) {
@@ -28,6 +28,11 @@ public class MajorVersion {
         max = j;
       }
     }
-    return new MajorVersion(max);
+    return new Version(max);
+  }
+
+  @Override
+  public String toString()  {
+    return String.valueOf(version);
   }
 }

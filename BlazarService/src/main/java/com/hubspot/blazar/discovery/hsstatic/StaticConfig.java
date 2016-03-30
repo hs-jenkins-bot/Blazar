@@ -10,29 +10,29 @@ import com.google.common.base.Objects;
 public class StaticConfig {
 
   private final String name;
-  private final int majorVersion;
+  private final Version majorVersion;
   private final boolean isCurrentVersion;
-  private Map<String, MajorVersion> runtimeDeps;
-  private final Map<String, Integer> deps;
+  private Map<String, Version> runtimeDeps;
+  private final Map<String, Version> deps;
 
   @JsonCreator
   public StaticConfig(@JsonProperty("name") String name,
-                      @JsonProperty("majorVersion") int majorVersion,
+                      @JsonProperty("majorVersion") Version majorVersion,
                       @JsonProperty("isCurrentVersion") boolean isCurrentVersion,
-                      @JsonProperty("runtimeDeps") Map<String, MajorVersion> runtimeDeps,
-                      @JsonProperty("deps") Map<String, Integer> deps) {
+                      @JsonProperty("runtimeDeps") Map<String, Version> runtimeDeps,
+                      @JsonProperty("deps") Map<String, Version> deps) {
     this.name = name;
     this.majorVersion = majorVersion;
     this.isCurrentVersion = isCurrentVersion;
-    this.runtimeDeps = Objects.firstNonNull(runtimeDeps, Collections.<String, MajorVersion>emptyMap());
-    this.deps = Objects.firstNonNull(deps, Collections.<String, Integer>emptyMap());
+    this.runtimeDeps = Objects.firstNonNull(runtimeDeps, Collections.<String, Version>emptyMap());
+    this.deps = Objects.firstNonNull(deps, Collections.<String, Version>emptyMap());
   }
 
   public String getName() {
     return name;
   }
 
-  public int getMajorVersion() {
+  public Version getMajorVersion() {
     return majorVersion;
   }
 
@@ -40,11 +40,11 @@ public class StaticConfig {
     return isCurrentVersion;
   }
 
-  public Map<String, MajorVersion> getRuntimeDeps() {
+  public Map<String, Version> getRuntimeDeps() {
     return runtimeDeps;
   }
 
-  public Map<String, Integer> getDeps() {
+  public Map<String, Version> getDeps() {
     return deps;
   }
 }

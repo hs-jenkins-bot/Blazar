@@ -81,13 +81,13 @@ public class HubSpotStaticModuleDiscovery implements ModuleDiscovery {
         continue;
       }
 
-      for (Map.Entry<String, Integer> entry: configObject.getDeps().entrySet()) {
-        depends.add(String.format("%s-%d", entry.getKey(), entry.getValue()));
+      for (Map.Entry<String, Version> entry: configObject.getDeps().entrySet()) {
+        depends.add(String.format("%s-%s", entry.getKey(), entry.getValue()));
       }
-      for (Map.Entry<String, MajorVersion> entry : configObject.getRuntimeDeps().entrySet()) {
-        depends.add(String.format("%s-%d", entry.getKey(), entry.getValue().getVersion()));
+      for (Map.Entry<String, Version> entry : configObject.getRuntimeDeps().entrySet()) {
+        depends.add(String.format("%s-%s", entry.getKey(), entry.getValue().getVersion()));
       }
-      provides.add(String.format("%s-%d", configObject.getName(), configObject.getMajorVersion()));
+      provides.add(String.format("%s-%s", configObject.getName(), configObject.getMajorVersion()));
       modules.add(new DiscoveredModule(configObject.getName(), "hs-static", moduleDirectory, glob, BUILD_CONFIGURATION, new DependencyInfo(depends, provides)));
     }
     return new DiscoveryResult(modules, malformedFiles);
