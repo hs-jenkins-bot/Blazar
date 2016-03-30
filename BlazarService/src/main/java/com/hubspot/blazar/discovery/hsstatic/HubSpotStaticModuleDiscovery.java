@@ -84,8 +84,8 @@ public class HubSpotStaticModuleDiscovery implements ModuleDiscovery {
       for (Map.Entry<String, Integer> entry: configObject.getDeps().entrySet()) {
         depends.add(String.format("%s-%d", entry.getKey(), entry.getValue()));
       }
-      for (Map.Entry<String, Integer> entry : configObject.getRuntimeDeps().entrySet()) {
-        depends.add(String.format("%s-%d", entry.getKey(), entry.getValue()));
+      for (Map.Entry<String, MajorVersion> entry : configObject.getRuntimeDeps().entrySet()) {
+        depends.add(String.format("%s-%d", entry.getKey(), entry.getValue().getVersion()));
       }
       provides.add(String.format("%s-%d", configObject.getName(), configObject.getMajorVersion()));
       modules.add(new DiscoveredModule(configObject.getName(), "hs-static", moduleDirectory, glob, BUILD_CONFIGURATION, new DependencyInfo(depends, provides)));
