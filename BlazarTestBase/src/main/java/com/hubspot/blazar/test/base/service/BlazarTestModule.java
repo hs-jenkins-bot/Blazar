@@ -1,4 +1,7 @@
-package com.hubspot.blazar.data;
+package com.hubspot.blazar.data.service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -12,7 +15,8 @@ import com.hubspot.jackson.datatype.protobuf.ProtobufModule;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jackson.Jackson;
 
-public class BlazarDataTestModule implements Module {
+public class BlazarTestModule implements Module {
+  private static final Logger LOG = LoggerFactory.getLogger(BlazarTestModule.class);
 
   @Override
   public void configure(Binder binder) {
@@ -45,7 +49,7 @@ public class BlazarDataTestModule implements Module {
 
       @Override
       public void post(Object event) {
-        // TODO
+        LOG.debug("Got event {}", event);
       }
     };
   }
